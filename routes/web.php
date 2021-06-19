@@ -22,3 +22,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('questiontype', \App\Http\Controllers\QuestionTypeController::class);
+Route::resource('exercise', \App\Http\Controllers\ExerciseController::class);
