@@ -25,7 +25,7 @@
                 <td class="text-center">{{$exercise->questionType->name}}</td>
                 <td>
                     <div class="stacked-for-small expanded button-group" style="margin: 0">
-                        <a class="button">View</a>
+                        <a class="button" href="{{route('exercise.show', $exercise)}}">View</a>
                         <a class="button success">Edit</a>
                         <a class="button alert">Delete</a>
                     </div>

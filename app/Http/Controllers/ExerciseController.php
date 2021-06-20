@@ -45,11 +45,11 @@ class ExerciseController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Exercise  $exercise
-     * @return Response
+     * @return View
      */
     public function show(Exercise $exercise)
     {
-        //
+        return view('Exercise.show', compact('exercise'));
     }
 
     /**
