@@ -62,6 +62,16 @@
         </div>
     </header>
 
+    <!-- Message banner -->
+    @if (session('status'))
+        <div class="callout success" data-closable>
+            <button class="close-button" aria-label="Close alert" type="button" data-close>
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{ session('status') }}
+        </div>
+    @endif
+
 <!-- Page Content -->
     <main class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

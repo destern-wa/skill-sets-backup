@@ -102,13 +102,25 @@ class ExerciseController extends Controller
     }
 
     /**
+     * Show the form for deleting the specified resource.
+     *
+     * @param Exercise $exercise
+     * @return View
+     */
+    public function delete(Exercise $exercise)
+    {
+        return view('Exercise.delete', compact('exercise'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Exercise $exercise
-     * @return Response
+     * @return RedirectResponse
      */
     public function destroy(Exercise $exercise)
     {
-        //
+        $exercise->delete();
+        return redirect(route('exercise.index'))->with('status', 'Exercise deleted!');
     }
 }

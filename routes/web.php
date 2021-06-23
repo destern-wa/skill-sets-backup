@@ -23,3 +23,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::resource('questiontype', \App\Http\Controllers\QuestionTypeController::class);
 Route::resource('exercise', \App\Http\Controllers\ExerciseController::class);
+Route::get('exercise/{exercise}/delete', '\App\Http\Controllers\ExerciseController@delete')->name('exercise.delete');
