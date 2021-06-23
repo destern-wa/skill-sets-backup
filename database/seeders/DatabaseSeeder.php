@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call(
             [
                 QuestionTypeSeeder::class,
+                ExerciseSeeder::class,
             ]
         );
     }
