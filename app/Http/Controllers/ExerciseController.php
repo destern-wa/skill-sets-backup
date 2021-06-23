@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise;
+use App\Models\QuestionType;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Contracts\View\View;
@@ -23,22 +25,35 @@ class ExerciseController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return View
      */
     public function create()
     {
-        //
+        $questionTypes = QuestionType::all();
+        return view('Exercise.create', compact('questionTypes'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Response
+     * @param Request $request
+     * @param  Exercise  $exercise
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request, Exercise $exercise)
     {
-        //
+        $this->validate($request, [
+            'question' => 'required',
+            'questionType' => 'required|numeric|integer|min:1'
+        ]);
+        $questionType = QuestionType::findOrFail($request->get('questionType'));
+
+        $exercise = new Exercise();
+        $exercise->question = $request->get('question');
+        $exercise->questionType()->associate($questionType);
+        $exercise->save();
+
+        return redirect(route('exercise.show', $exercise));
     }
 
     /**
@@ -66,7 +81,7 @@ class ExerciseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  \App\Models\Exercise  $exercise
      * @return Response
      */
