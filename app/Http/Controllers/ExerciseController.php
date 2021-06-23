@@ -59,7 +59,7 @@ class ExerciseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Exercise  $exercise
+     * @param Exercise $exercise
      * @return View
      */
     public function show(Exercise $exercise)
@@ -70,30 +70,41 @@ class ExerciseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Exercise  $exercise
-     * @return Response
+     * @param Exercise $exercise
+     * @return View
      */
     public function edit(Exercise $exercise)
     {
-        //
+        $questionTypes = QuestionType::all();
+        return view('Exercise.edit', compact('exercise', 'questionTypes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  \App\Models\Exercise  $exercise
-     * @return Response
+     * @param Exercise $exercise
+     * @return RedirectResponse
      */
     public function update(Request $request, Exercise $exercise)
     {
-        //
+        $this->validate($request, [
+            'question' => 'required',
+            'questionType' => 'required|numeric|integer|min:1'
+        ]);
+        $questionType = QuestionType::findOrFail($request->get('questionType'));
+
+        $exercise->question = $request->get('question');
+        $exercise->questionType()->associate($questionType);
+        $exercise->save();
+
+        return redirect(route('exercise.show', $exercise));
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Exercise  $exercise
+     * @param Exercise $exercise
      * @return Response
      */
     public function destroy(Exercise $exercise)

@@ -14,7 +14,7 @@
             <dd class="cell small-12 medium-9">{{$exercise->questionType->name}}</dd>
         </dl>
         <div class="cell small-12 medium-3">
-            <a class="button expanded success">Edit</a>
+            <a class="button expanded success" href="{{route('exercise.edit', $exercise)}}">Edit</a>
         </div>
         <div class="cell small-12 medium-3">
             <a class="button expanded alert">Delete</a>
