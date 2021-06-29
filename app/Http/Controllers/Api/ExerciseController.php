@@ -35,12 +35,12 @@ class ExerciseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Exercise $exercise
+     * @return JsonResponse
      */
-    public function show($id)
+    public function show(Exercise $exercise)
     {
-        //
+        return response()->json($exercise, Response::HTTP_OK);
     }
 
     /**
