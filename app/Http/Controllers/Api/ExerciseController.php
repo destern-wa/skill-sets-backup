@@ -78,11 +78,12 @@ class ExerciseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Exercise $exercise
+     * @return JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Exercise $exercise)
     {
-        //
+        $exercise->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
