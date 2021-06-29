@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Exercise;
+use App\Models\QuestionType;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -24,12 +25,22 @@ class ExerciseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'question' => 'required',
+            'questionType' => 'required|numeric|integer|exists:question_types,id'
+        ]);
+
+        $exercise = new Exercise();
+        $exercise->question = $request->get('question');
+        $exercise->question_type_id = $request->get('questionType');
+        $exercise->save();
+
+        return response()->json($exercise, Response::HTTP_CREATED);
     }
 
     /**
