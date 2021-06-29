@@ -57,13 +57,22 @@ class ExerciseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  Exercise  $exercise
+     * @return JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Exercise $exercise)
     {
-        //
+        $this->validate($request, [
+            'question' => 'required',
+            'questionType' => 'required|numeric|integer|exists:question_types,id'
+        ]);
+
+        $exercise->question = $request->get('question');
+        $exercise->question_type_id = $request->get('questionType');
+        $exercise->save();
+
+        return response()->json($exercise, Response::HTTP_OK);
     }
 
     /**
