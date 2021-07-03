@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('exercise', App\Http\Controllers\Api\ExerciseController::class)->names([
+    'index'   => 'api.exercise.index',
+    'store'   => 'api.exercise.store',
+    'show'    => 'api.exercise.show',
+    'update'  => 'api.exercise.update',
+    'destroy' => 'api.exercise.destroy',
+]);
