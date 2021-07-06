@@ -22,9 +22,11 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users', 'ends_with:@nmtafe.wa.edu.au'],
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
+        ], [
+            'email.ends_with' => 'Sorry, registration is currently restricted to North Metropolitan TAFE staff'
         ])->validate();
 
         return User::create([
