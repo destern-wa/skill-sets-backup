@@ -43,9 +43,9 @@
                 <td class="text-center">@if($answer->isCorrect)✅@else❌@endif</td>
                 <td>
                     <div class="stacked-for-small expanded button-group" style="margin: 0">
-                        <a class="button" href="{{route('exercise.show', $exercise)}}">View</a>
-                        <a class="button success" href="{{route('exercise.edit', $exercise)}}">Edit</a>
-                        <a class="button alert" href="{{route('exercise.delete', $exercise)}}">Delete</a>
+                        <a class="button" href="{{route('answer.show', $answer)}}">View</a>
+                        <a class="button success" href="{{route('answer.edit', $answer)}}">Edit</a>
+                        <a class="button alert" href="{{route('answer.delete', $answer)}}">Delete</a>
                     </div>
                 </td>
             </tr>

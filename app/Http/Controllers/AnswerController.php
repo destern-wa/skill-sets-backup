@@ -38,7 +38,8 @@ class AnswerController extends Controller
      */
     public function show(Answer $answer)
     {
-        //
+        $exercise = $answer->exercise;
+        return view('Answer.show', compact('answer', 'exercise'));
     }
 
     /**
@@ -70,7 +71,7 @@ class AnswerController extends Controller
      * @param Answer $answer
      * @return View
      */
-    public function delete(Exercise $exercise)
+    public function delete(Answer $exercise)
     {
         //
     }
