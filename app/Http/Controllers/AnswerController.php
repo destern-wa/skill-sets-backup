@@ -91,9 +91,9 @@ class AnswerController extends Controller
      * @param Answer $answer
      * @return View
      */
-    public function delete(Answer $exercise)
+    public function delete(Answer $answer)
     {
-        //
+        return view('Answer.delete', compact('answer'));
     }
     /**
      * Remove the specified resource from storage.
@@ -103,6 +103,7 @@ class AnswerController extends Controller
      */
     public function destroy(Answer $answer)
     {
-        //
+        $answer->delete();
+        return redirect(route('exercise.show', $answer->exercise))->with('status', 'Answer deleted!');
     }
 }

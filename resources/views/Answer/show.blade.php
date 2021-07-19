@@ -25,10 +25,10 @@
             <dd class="cell small-12 medium-9">@if($answer->isCorrect) Yes @else No @endif</dd>
         </dl>
         <div class="cell small-12 medium-3">
-            <a class="button expanded success" href="{{route('answer.edit', $exercise)}}">Edit</a>
+            <a class="button expanded success" href="{{route('answer.edit', $answer)}}">Edit</a>
         </div>
         <div class="cell small-12 medium-3">
-            <a class="button expanded alert" href="{{route('answer.delete', $exercise)}}">Delete</a>
+            <a class="button expanded alert" href="{{route('answer.delete', $answer)}}">Delete</a>
         </div>
         <div class="cell small-12 medium-3 medium-offset-3">
             <a class="button expanded secondary" href="{{route('exercise.show', $exercise)}}">View exercise</a>
