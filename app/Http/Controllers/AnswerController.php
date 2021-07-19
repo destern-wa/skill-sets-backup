@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Answer;
+use App\Models\Exercise;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -14,9 +16,10 @@ class AnswerController extends Controller
      *
      * @return  View
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $exercise = Exercise::findOrFail($request->exercise);
+        return view('Answer.create', compact('exercise'));
     }
 
     /**
@@ -27,7 +30,18 @@ class AnswerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'solution' => 'required',
+            'exercise_id' => 'required|integer'
+        ]);
+        $exercise = Exercise::findOrFail($request->get('exercise_id'));
+        $exercise->answers()->save(
+            new Answer([
+                'solution' => $request->get('solution'),
+                'isCorrect' => $request->boolean('isCorrect')
+            ])
+        );
+        return redirect(route('exercise.show', $exercise))->with('status', 'Answer created!');
     }
 
     /**

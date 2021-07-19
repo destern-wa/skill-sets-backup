@@ -56,7 +56,7 @@
         @endforelse
         <tfoot>
         <td colspan="3">
-            <a class="button hollow" href="">Add answer</a>
+            <a class="button hollow" href="{{route('answer.create', ['exercise'=>$exercise->id])}}">Add answer</a>
         </td>
         </tfoot>
     </table>
