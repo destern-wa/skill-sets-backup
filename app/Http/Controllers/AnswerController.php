@@ -22,7 +22,7 @@ class AnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return RedirectResponse
      */
     public function store(Request $request)
@@ -50,19 +50,25 @@ class AnswerController extends Controller
      */
     public function edit(Answer $answer)
     {
-        //
+        return view('Answer.edit', compact('answer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param Answer $answer
      * @return RedirectResponse
      */
     public function update(Request $request, Answer $answer)
     {
-        //
+        $this->validate($request, [
+            'solution' => 'required',
+        ]);
+        $answer->solution = $request->get('solution');
+        $answer->isCorrect = $request->boolean('isCorrect');
+        $answer->save();
+        return redirect(route('exercise.show', $answer->exercise))->with('status', 'Answer updated!');
     }
 
     /**
